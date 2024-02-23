@@ -1,0 +1,45 @@
+h1 {
+
+    background-color: black;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+
+}
+
+fieldset {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+table {
+
+    margin: auto;
+    border-collapse: collapse;
+
+}
+
+td, th, tr {
+
+    text-align: center;
+    
+
+
+}
+
+td, th {
+
+    padding-left: 50px;
+    padding-right: 50px;    
+
+}
+
+tr {
+
+    border-bottom: 0.5px solid black;
+
+}
