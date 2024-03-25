@@ -1,35 +1,23 @@
+import { AgGridReact } from "ag-grid-react";
+import "ag-grid-community/styles/ag-grid.css";
+import "ag-grid-community/styles/ag-theme-material.css"; // Material Design theme
+
 const TodoTable = (props) => {
 
     return (
 
-        <>
+        <div className="ag-theme-material" style={{ width: 700, height: 500 }}>
 
-            {props.todos.length === 0 ? <p></p> : (
+            <AgGridReact
+                ref={props.gridRef}
+                onGridReady={params => props.gridRef.current = params.api}
+                rowData={props.data}
+                columnDefs={props.columns}
+                rowSelection="single"
+            />
 
-                <table>
-                    <tbody>
+        </div>
 
-                        <tr>
-                            <th>Date</th>
-                            <th>Description</th>
-                        </tr>
-
-                        {props.todos.map((todo, index) => (
-
-                            <tr key={index}>
-
-                                <td>{todo.date}</td>
-                                <td>{todo.description}</td>
-                                <td><button onClick={() => props.deleteTask(index)}>Delete</button></td>
-
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-
-            )}
-
-        </>
     )
 
 }
