@@ -1,9 +1,10 @@
 import { useRef, useState } from "react";
 import TodoTable from "./TodoTable";
+import { DatePicker } from "@mui/x-date-pickers";
 
 const TodoList = () => {
 
-    const [todo, setTodo] = useState({ description: "", priority: "", date: "" });
+    const [todo, setTodo] = useState({ description: "", priority: "", date: null });
     const [todos, setTodos] = useState([]);
     const gridRef = useRef();
 
@@ -14,7 +15,10 @@ const TodoList = () => {
             cellStyle: params => params.value === "High" ? { color: 'red' } : { color: 'black' },
             filter: true, floatingFilter: true
         },
-        { field: 'date', filter: true, floatingFilter: true}
+        {
+            field: 'date', filter: true, floatingFilter: true,
+            valueFormatter: params => new Date(params.value).toLocaleDateString()
+        }
     ]);
 
     const handleChange = (event) => {
@@ -23,9 +27,15 @@ const TodoList = () => {
 
     }
 
+    const handleDate = (value) => {
+
+        setTodo({ ...todo, date: value });
+
+    }
+
     const addTodo = () => {
 
-        if (todo.date === "" || todo.priority === "" || todo.description === "") {
+        if (todo.date === null || todo.priority === "" || todo.description === "") {
 
             alert("Fill all fields!");
 
@@ -34,7 +44,7 @@ const TodoList = () => {
         }
 
         setTodos([...todos, todo]);
-        setTodo({ description: "", priority: "", date: "" });
+        setTodo({ description: "", priority: "", date: null });
     };
 
     const deleteTodo = () => {
@@ -43,7 +53,7 @@ const TodoList = () => {
 
             const newTodos = todos.filter((todo, i) => i != gridRef.current.getSelectedNodes()[0].id);
             setTodos([...newTodos]);
-    
+
         }
 
         else {
@@ -63,14 +73,14 @@ const TodoList = () => {
                 <legend>Add todo:</legend>
                 <label htmlFor="description">Description:<input type="text" name="description" id="description" placeholder="Description" value={todo.description} onChange={handleChange} /></label>
                 <label htmlFor="priority">Priority:<input type="text" name="priority" id="priority" placeholder="Priority" value={todo.priority} onChange={handleChange} /></label>
-                <label htmlFor="date">Date:<input type="date" name="date" id="date" value={todo.date} onChange={handleChange} /></label>
+                <DatePicker label="Pick a date" value={todo.date} onChange={handleDate} />
                 <button onClick={addTodo}>Add</button>
                 <button onClick={deleteTodo}>Delete</button>
             </fieldset>
 
             {todos.length === 0 ? <p></p> : (
 
-                <TodoTable gridRef={gridRef} data={todos} columns={columnDefs}/>
+                <TodoTable gridRef={gridRef} data={todos} columns={columnDefs} />
 
             )}
 

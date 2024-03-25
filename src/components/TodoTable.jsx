@@ -6,7 +6,7 @@ const TodoTable = (props) => {
 
     return (
 
-        <div className="ag-theme-material" style={{ width: 700, height: 500 }}>
+        <div className="ag-theme-material" style={{ width: 800, height: 500 }}>
 
             <AgGridReact
                 ref={props.gridRef}
