@@ -1,6 +1,12 @@
 import { useRef, useState } from "react";
 import TodoTable from "./TodoTable";
 import { DatePicker } from "@mui/x-date-pickers";
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
+import DeleteIcon from '@mui/icons-material/Delete';
+import SendIcon from '@mui/icons-material/Send';
+
 
 const TodoList = () => {
 
@@ -17,7 +23,7 @@ const TodoList = () => {
         },
         {
             field: 'date', filter: true, floatingFilter: true,
-            valueFormatter: params => new Date(params.value).toLocaleDateString()
+            valueFormatter: params => new Date(params.value).toLocaleDateString("fi-FI")
         }
     ]);
 
@@ -68,19 +74,21 @@ const TodoList = () => {
 
         <>
 
-            <h1>Simple Todolist</h1>
             <fieldset>
                 <legend>Add todo:</legend>
-                <label htmlFor="description">Description:<input type="text" name="description" id="description" placeholder="Description" value={todo.description} onChange={handleChange} /></label>
-                <label htmlFor="priority">Priority:<input type="text" name="priority" id="priority" placeholder="Priority" value={todo.priority} onChange={handleChange} /></label>
-                <DatePicker label="Pick a date" value={todo.date} onChange={handleDate} />
-                <button onClick={addTodo}>Add</button>
-                <button onClick={deleteTodo}>Delete</button>
+                <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
+                    <TextField label="Description" name="description" value={todo.description} onChange={handleChange} />
+                    <TextField label="Priority" name="priority" value={todo.priority} onChange={handleChange} />
+                    <DatePicker label="Pick a date" value={todo.date} onChange={handleDate} />
+                    <Button endIcon={<SendIcon/>} color="success" variant="outlined" onClick={addTodo}>Add</Button>
+                    <Button startIcon={<DeleteIcon/>} color="error" variant="outlined" onClick={deleteTodo}>Delete</Button>
+                </Stack>
             </fieldset>
 
             {todos.length === 0 ? <p></p> : (
-
-                <TodoTable gridRef={gridRef} data={todos} columns={columnDefs} />
+                <Stack justifyContent="center" alignItems="center">
+                    <TodoTable gridRef={gridRef} data={todos} columns={columnDefs} />
+                </Stack>
 
             )}
 

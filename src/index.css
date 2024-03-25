@@ -1,47 +1,14 @@
-h1 {
-
-    background-color: black;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    width: 100%;
-
-}
-
-label {
-
-    padding-right: 10px;
-
-}
-
 fieldset {
+
+    margin-top: 20px;
+
+}
+
+h1 {
 
     display: flex;
     justify-content: center;
     align-items: center;
-
-}
-
-.ag-theme-material {
-
-    margin: auto;
-
-}
-
-button {
-
-    margin-left: 10px;
-    background-color: black;
-    color: white;
-    padding: 10px;
-    border-radius: 10px;
-    cursor: pointer;
-
-}
-
-button:hover {
-
-    background-color: white;
-    color: black;
+    margin-top: 0;
 
 }
